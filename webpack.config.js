@@ -1,4 +1,5 @@
 var webpack = require("webpack");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -19,10 +20,19 @@ module.exports = {
         test: /\.ts/,
         loaders: ['ts-loader'],
         exclude: /node_modules/
-      }
+      },
+      {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract('style', 'css!less')
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|eot|woff|woff2|ttf)(\?.*$|$)/,
+        loader: 'file'
+      },
     ]
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"./dist/vendor.bundle.js")
+    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"./dist/vendor.bundle.js"),
+    new ExtractTextPlugin('./dist/style.css'),
   ]
 }
