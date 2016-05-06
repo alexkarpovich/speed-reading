@@ -30,9 +30,10 @@ export class Menu {
 		let group = topNavSnap.group();
 		let x = 0;
 		let y = 0;
+		let shadow = topNavSnap.filter(Snap.filter.shadow(0, 0, 2));
 
 		this.items.forEach(item => {
-			this.initRect(topNavSnap, group, item, x, y);
+			this.initRect(topNavSnap, group, item, x, y, shadow);
 
 			x += 1;
 
@@ -47,15 +48,13 @@ export class Menu {
 		});
 	}
 
-	initRect(topNavSnap, group, item, x, y) {
+	initRect(topNavSnap, group, item, x, y, shadow) {
 		let box = Snap().rect(
 			x*(this.boxSize+this.spaceSize), 
 			y*(this.boxSize+this.spaceSize), 
 			this.boxSize, 
 			this.boxSize
 		);
-
-		let shadow = topNavSnap.filter(Snap.filter.shadow(0, 2, 3));
 
 		box.attr({
 			id: item.key,
@@ -64,7 +63,8 @@ export class Menu {
 		});
 
 		box.hover(() => {
-			box.animate({transform: 's2,2'}, 500, mina.elastic);
+			group.paper.append(box);
+			box.animate({transform: 's1.5,1.5'}, 500, mina.elastic);
 		}, () => {
 			box.animate({transform: 's1,1'}, 500, mina.elastic);
 		});
