@@ -52,23 +52,18 @@ export class Menu {
 
 	initRect(group, item, x, y, shadow) {
 		let boxGroup = group.group();
-		let box = this.surface.rect(
-			x*(this.boxSize+this.spaceSize), 
-			y*(this.boxSize+this.spaceSize), 
-			this.boxSize, 
-			this.boxSize
-		);
-		let title = this.surface.text(x*(this.boxSize+this.spaceSize), y*(this.boxSize+this.spaceSize) + 50, item.title);
+		let coords = {
+			x: x*(this.boxSize+this.spaceSize),
+			y: y*(this.boxSize+this.spaceSize)
+		};
+		let box = this.surface.rect(coords.x, coords.y, this.boxSize, this.boxSize);
+		let title = this.surface.text(coords.x + 50, coords.y + 90, item.title);
 
 		boxGroup.append(box);
 		boxGroup.append(title);
 		boxGroup.attr({class: 'menu-item'});
-		box.attr({
-			id: item.key,
-			fill: '#197700',
-			filter: shadow
-		});
-		title.attr({opacity: '0'});
+		box.attr({id: item.key, fill: '#197700', filter: shadow});
+		title.attr({textAnchor: 'middle', opacity: '0'});
 
 		boxGroup.hover(
 			() => this.handleBoxHoverIn(group, boxGroup, title), 
