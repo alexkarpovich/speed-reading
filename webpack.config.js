@@ -31,6 +31,9 @@ module.exports = {
       },
     ]
   },
+  devServer: {
+    historyApiFallback: true
+  },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"./dist/vendor.bundle.js"),
     new ExtractTextPlugin('./dist/style.css'),

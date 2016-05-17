@@ -28,9 +28,9 @@ export class Menu {
 
 	constructor(private router: Router) {}
 
-	ngAfterViewInit() {	
+	ngAfterViewInit() {
 		this.surface = new Snap(this.topNav.nativeElement);
-		let group = this.surface.group();		
+		let group = this.surface.group();
 		let shadow = this.surface.filter(Snap.filter.shadow(0, 0, 1));
 		let x = 0, y = 0;
 
@@ -63,17 +63,23 @@ export class Menu {
 		boxGroup.append(title);
 		boxGroup.attr({class: 'menu-item'});
 		box.attr({id: item.key, fill: '#197700', filter: shadow});
-		title.attr({textAnchor: 'middle', opacity: '0'});
+		title.attr({
+			textAnchor: 'middle',
+			fontFamily: 'Bitter',
+			fontSize: '10px',
+			fill: '#ffffff',
+			opacity: '0'
+		});
 
 		boxGroup.hover(
-			() => this.handleBoxHoverIn(group, boxGroup, title), 
+			() => this.handleBoxHoverIn(group, boxGroup, title),
 			() => this.handleBoxHoverOut(boxGroup, title)
 		);
 		boxGroup.click(() => this.handleBoxClick(boxGroup, item));
 	}
 
 	handleBoxHoverIn(group, boxGroup, title) {
-		group.append(boxGroup);			
+		group.append(boxGroup);
 		boxGroup.animate({transform: 's1.5,1.5'}, 500, mina.elastic);
 		title.attr({opacity: '1'});
 	}
@@ -85,6 +91,6 @@ export class Menu {
 
 	handleBoxClick(boxGroup, item) {
 		boxGroup.animate({transform: 's1.3,1.3'}, 500, mina.elastic);
-		this.router.navigate([item.routeName]);	
+		this.router.navigate([item.routeName]);
 	}
 }

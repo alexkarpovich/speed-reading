@@ -1,0 +1,42 @@
+.schulte-table-control {
+    position: absolute;
+    padding: 10px;
+
+    &.open {
+        width: 200px;
+        height: 100%;
+        background: linear-gradient(to top, #ECECEC, #DEDEDE);
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+        .title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .apply, .cancel {
+            width: 90px;
+        }
+    }
+    &.close {
+        top:40%;
+
+        .control-menu {
+            background-color: #cfcfcf;
+            position: absolute;
+            cursor: pointer;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+            &:hover {
+                background-color: #333;
+            }
+        }
+    }
+
+
+}
